@@ -1,4 +1,19 @@
 ﻿#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+// Кодировка UTF-8
+// move-семантика
+
+void arr_add(int*& arr, int l, int num) {
+	if (num <= 0)
+		return;
+	int* tmp = new int[l + num]{};
+	for (int i{}; i < l; i++)
+		tmp[i] = arr[i];
+	delete[] arr;
+	arr = tmp;
+}
 
 int main() {
 	setlocale(LC_ALL, "Russian");
@@ -79,7 +94,32 @@ int main() {
 	delete[] mx;
 	*/
 
+	// Задача 1. Увеличение размера массива.
+	
 
+	std::cout << "Задача 1.\nВведите размер массива -> ";
+	int s1;
+	std::cin >> s1;
+	int* arr1 = new int[s1];
+	
+	srand(time(NULL));
+	std::cout << "Изначальный массив:\n";
+	for (int i{}; i < s1; i++) {
+		arr1[i] = rand() % 10 + 1;
+		std::cout << arr1[i] << " ";
+	}
+	std::cout << std::endl;
+
+	std::cout << "Введите кол-во доп. элементов -> ";
+	std::cin >> n;
+
+	arr_add(arr1, s1, n);
+	s1 += n;
+
+	std::cout << "Итоговый массив:\n";
+	for (int i{}; i < s1; i++)
+		std::cout << arr1[i] << " ";
+	std::cout << std::endl;
 
 
 	return 0;
